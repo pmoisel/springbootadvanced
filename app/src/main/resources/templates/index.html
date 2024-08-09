@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Index</title>
+</head>
+<body>
+<h1>SpringBoot Advanced</h1>
+
+<span>Zur <a href="customers">Kundenliste</a></span>
+
+<div style="margin-top: 2rem">
+  <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+  </form>
+</div>
+</body>
+</html>

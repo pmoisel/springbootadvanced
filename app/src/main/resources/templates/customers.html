@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Customer List</title>
+</head>
+<body>
+<div style="margin: 2rem;">
+  <table style="border: dotted;">
+    <thead style="background-color: aqua">
+    <tr>
+      <th>E-Mail</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(customers)}">
+      Keine Kunden gefunden
+    </tr>
+    <tr th:each="customer : ${customers}">
+      <td>
+        <span th:text="${customer.email}"/>
+      </td>
+      <td>
+        <span th:text="${customer.firstName}"/>
+      </td>
+      <td>
+        <span th:text="${customer.lastName}"/>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div style="margin: 2rem;">
+  <form action="#" th:action="@{/customers}" th:object="${newCustomer}" method="post">
+    <div>
+      <label for="email">E-Mail: </label><input id="email" type="text" th:field="*{email}"/></p>
+      <ul>
+        <li th:each="err : ${#fields.errors('email')}" th:text="${err}" />
+      </ul>
+    </div>
+    <div>
+      <label for="firstName">Vorname: </label><input id="firstName" type="text" th:field="*{firstName}"/></p>
+      <ul>
+        <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" />
+      </ul>
+    </div>
+    <div>
+      <label for="lastName">Nachname: </label><input id="lastName" type="text" th:field="*{lastName}"/></p>
+      <ul>
+        <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}" />
+      </ul>
+    </div>
+    <p><input type="submit" value="Anlegen"/>
+  </form>
+</div>
+<div style="margin: 2rem;">
+  <a th:href="index">zurück</a>
+</div>
+</body>
+</html>

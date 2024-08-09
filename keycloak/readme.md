@@ -1,0 +1,1 @@
+Konfigurierter Keycloak in docker-compose 
