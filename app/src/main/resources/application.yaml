@@ -6,4 +6,23 @@ spring:
     password: sa
   jpa:
     defer-datasource-initialization: true
-#debug: true
+debug: true
+management:
+  endpoint:
+    health:
+      show-components: always
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+nterra:
+  spring:
+    security:
+      oauth2:
+        keycloakclient:
+          uri: http://localhost:8180
+          redirectUri: http://localhost:8080
+          realm: schulung
+          clientId: nterra
+          clientSecret: swYAnmMiWEdE1598Fe2ZC2nR99IDRWx7

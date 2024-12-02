@@ -1,5 +1,6 @@
 package com.nterra.springbootadvanced.service;
 
+import com.nterra.springbootadvanced.config.LogExecutionTime;
 import com.nterra.springbootadvanced.model.Customer;
 import com.nterra.springbootadvanced.model.CustomerDTO;
 import java.util.Optional;
@@ -15,11 +16,13 @@ public class CustomerService {
 
   public final CrudRepository<Customer, String> customerRepository;
 
+  @LogExecutionTime
   public Stream<CustomerDTO> findAll() {
     return StreamSupport.stream(customerRepository.findAll().spliterator(), false)
         .map(CustomerDTO::new);
   }
 
+  @LogExecutionTime
   public Customer save(CustomerDTO customerDTO) {
     return customerRepository.save(new Customer(customerDTO));
   }

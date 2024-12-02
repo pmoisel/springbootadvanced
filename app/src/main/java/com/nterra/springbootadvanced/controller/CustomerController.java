@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class CustomerController {
 
   @GetMapping(value = "/customers",
       produces = MediaType.APPLICATION_JSON_VALUE)
+  @PreAuthorize("hasRole('USER')")
   public ResponseEntity<List<CustomerDTO>> getCustomers() {
     return ResponseEntity.ok(customerService.findAll().toList());
   }
@@ -31,12 +33,14 @@ public class CustomerController {
   @PostMapping(value = "/customer",
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
+  @PreAuthorize("hasRole('MANAGER')")
   public ResponseEntity<CustomerDTO> postCustomer(@RequestBody CustomerDTO customerDTO) {
     return ResponseEntity.ok(new CustomerDTO(customerService.save(customerDTO)));
   }
 
   @GetMapping(value = "/customers",
       produces = MediaType.TEXT_HTML_VALUE)
+  @PreAuthorize("hasRole('USER')")
   public ModelAndView customerList(ModelAndView modelAndView) {
     modelAndView.addObject("customers", customerService.findAll().toList());
     modelAndView.addObject("newCustomer", new CustomerDTO());
@@ -45,6 +49,7 @@ public class CustomerController {
 
   @PostMapping(value = "/customers",
       produces = MediaType.TEXT_HTML_VALUE)
+  @PreAuthorize("hasRole('MANAGER')")
   public ModelAndView customerList(
       @ModelAttribute("newCustomer") CustomerDTO customerFormData,
       BindingResult bindingResult,

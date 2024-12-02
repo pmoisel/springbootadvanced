@@ -10,6 +10,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Profile("!jpa")
 public class InMemoryCustomerRepository implements CrudRepository<Customer, String> {
 
   private final Map<String, Customer> customers = new HashMap<>();

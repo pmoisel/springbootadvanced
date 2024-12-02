@@ -16,8 +16,9 @@
 	<description>Schulungsprojekt Spring Boot Advanced</description>
 
 	<modules>
-		<module>app</module>
 		<module>keycloakclient</module>
+		<module>autoconfig</module>
+		<module>app</module>
 	</modules>
 
 	<properties>
